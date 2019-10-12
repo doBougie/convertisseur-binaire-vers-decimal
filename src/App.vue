@@ -1,28 +1,66 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    Nombre en binaire
+    <br>
+    {{bin()}}
+    <br>
+    <div>
+      <button @click="invertBin(0)">{{nbBinaires[0]}}</button>
+      <button @click="invertBin(1)">{{nbBinaires[1]}}</button>
+      <button @click="invertBin(2)">{{nbBinaires[2]}}</button>
+      <button @click="invertBin(3)">{{nbBinaires[3]}}</button>
+      <button @click="invertBin(4)">{{nbBinaires[4]}}</button>
+      <button @click="invertBin(5)">{{nbBinaires[5]}}</button>
+      <button @click="invertBin(6)">{{nbBinaires[6]}}</button>
+      <button @click="invertBin(7)">{{nbBinaires[7]}}</button>
+    </div>
+    <br>
+    En décimale
+    <br>
+    {{bin_to_dec(bin())}}
+
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      nbBinaires: [0, 0, 0, 0, 0, 0, 0, 0],
+
+    };
+  },
+  methods: {
+    invertBin(id) {
+      if (this.nbBinaires[id] === 0) {
+        console.log('test');
+        this.nbBinaires[id] = 1;
+      } else {
+        console.log('test2');
+        this.nbBinaires[id] = 0;
+      }
+      this.$forceUpdate();
+    },
+    bin() {
+      let bin = '';
+      this.nbBinaires.forEach((nb) => {
+        bin += nb;
+      });
+      return bin;
+    },
+    bin_to_dec(bstr) {
+      return parseInt((`${bstr}`)
+        .replace(/[^01]/gi, ''), 2);
+    },
   },
 };
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app{
+  font-size: 50px;
 }
 </style>
